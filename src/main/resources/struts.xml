@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="basicStruts2" extends="struts-default">
+        <interceptors>
+            <interceptor name="myLog" class="edu.poly.hello.interceptor.MyLogInterceptor">
+            </interceptor>
+
+            <interceptor name="auth" class="edu.poly.hello.interceptor.AuthenticationInterceptor">
+            </interceptor>
+
+            <interceptor-stack name="defStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+            <interceptor-stack name="logStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="myLog"></interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="auth"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="defStack"></default-interceptor-ref>
+
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
+
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+
+    </package>
+    <constant name="struts.devMode" value="true"/>
+    <!--<constant name="struts.custom.i18n.resources" value="global" />-->
+    <constant name="struts.convention.action.suffix" value="Action"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="basicStruts2"/>
+    <constant name="struts.convention.exclude.parentClassLoader" value="false" />
+    <constant name="struts.convention.action.fileProtocols" value="jar,code-source" />
+    <constant name="struts.convention.classes.reload" value="true" />
+    <constant name="struts.convention.package.locators" value="action"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+</struts>
