@@ -7,12 +7,12 @@ import org.apache.struts2.convention.annotation.Result;
 
 public class DashboardAction extends ActionSupport {
     @Action(value = "/home", results = {
-            @Result(name = "seccess", location = "/dashboard.jsp")
+            @Result(name = "success", location = "/dashboard.jsp")
     }, interceptorRefs = {
             @InterceptorRef(value = "authStack")
     })
 
     public String home(){
-        return "seccess";
+        return "success";
     }
 }
