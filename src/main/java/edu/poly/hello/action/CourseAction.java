@@ -4,17 +4,28 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import java.io.FileOutputStream;
+
 public class CourseAction extends ActionSupport {
     private String courseID, name, description, message, category;
     private String categories[] = {
-            "java", "C#", ".net","ruby"
+            "java", "C#", ".net", "ruby"
     };
 
     @Action(value = "/course", results = {
             @Result(name = "success", location = "/course.jsp")
     })
-    public String register(){
-        message = "Category: " +category + " CourseID: " + courseID + " name: " + name + " Description: " +description;
+    public String register() {
+        message = "Category: " + category + " CourseID: " + courseID + " name: " + name + " Description: " + description;
+        try {
+            FileOutputStream outputStream = new FileOutputStream("D:\\message.txt");
+
+            byte b[] = message.getBytes();
+            outputStream.write(b);
+            outputStream.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         return SUCCESS;
     }
 
